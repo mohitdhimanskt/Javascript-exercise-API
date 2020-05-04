@@ -3,22 +3,68 @@
     <head>
         <meta charset="UTF-8">
         <meta name="veiwport" content="width=device-width , initial-scale=1.0">
-        <title>Document</title>
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Random Dog Photo Gallery</title>
         <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-        <style>
-       img{
-           width: 75px;
-           height: 75px;
-           float: left;
-       }
-        </style>
-    </head>
+     </head>
     <body>
-     <button id="btn1">axios</button>
-     <button id="btn2">xhr</button>
-     <ul id="ul">
+    <button id="button1">
+        Add a doggy photo with XHR
+    </button>
+    <button id="button2">
+        Add a doggy photo with axios
+    </button>
+    <ul class="ul"></ul>
+      <script>
+      let btn1 = document.querySelector('#button1')
+let btn2 = document.querySelector('#button2')
+let ul = document.querySelector('.ul')
+btn1.addEventListener("click",withXHR);
+btn2.addEventListener("click",withAxios);
 
-     </ul>
-      <script src="index.js"></script>
+    function withXHR(){
+        var oReq = new XMLHttpRequest();
+        oReq.open('GET','https://dog.ceo/api/breeds/image/random');
+        oReq.send();
+        oReq.onload = function(){
+            if(oReq.status == 200){
+            console.log('success')
+            const data = JSON.parse(oReq.responseText);
+            console.log(data)
+            console.log(data.message)
+            let li =document.createElement('li')
+            ul.appendChild(li)
+            let img =document.createElement('img')
+            li.appendChild(img)
+            img.src = data.message
+            } else {
+                console.log('error!')
+            } 
+            
+        }
+    }
+ 
+let data 
+function withAxios(){
+    axios.get('https://dog.ceo/api/breeds/image/random')
+    .then(
+        function (response) {
+            console.log(response);
+            data=response.data.message
+            console.log(data)
+            let li =document.createElement('li')
+            ul.appendChild(li)
+            let img =document.createElement('img')
+            li.appendChild(img)
+            img.src = data
+        })
+        .catch(function(error){
+            console.log('error');
+        })
+    .finally(function(){
+
+    });
+}   
+      </script>
     </body>
 </html>

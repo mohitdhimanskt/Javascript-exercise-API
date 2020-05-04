@@ -19,12 +19,7 @@ function reqListener() {
      oReq.open('GET', 'https://xkcd.now.sh/?comic=614');
      oReq.send();
 
-
-
-
-
-    
-    let data
+let data
     let img =document.createElement('img')
     document.body.appendChild(img)
 

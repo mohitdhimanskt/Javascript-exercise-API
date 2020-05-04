@@ -1,4 +1,4 @@
-const img = document.querySelector('#img');
+const img = document.getElementById('img');
 const postReg = new XMLHttpRequest();
 postReg.open('get',"https://xkcd.now.sh/?comic=614")
 postReg.send();
